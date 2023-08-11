@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.kotlinit.dob_calculator.databinding.ActivityMainBinding
@@ -32,9 +33,10 @@ fun Animation.setAnimationEndListener(callback: () -> Unit) {
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var btnCalculate: Button
-    private lateinit var btnSelectDate: Button
+    private lateinit var btnSelectDate: ImageView
     private lateinit var editTextDate: EditText
     private lateinit var resultViews: Map<TextView, Int>
+    private lateinit var selectedDateView: TextView
     private var selectedBirthDate: Calendar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         btnCalculate = binding.btnCalculate
         btnSelectDate = binding.btnSelectDate
         editTextDate = binding.editTextDate
+        selectedDateView = binding.selectedBirthDate
         setupListeners()
         resetUIFields()
     }
@@ -137,6 +140,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 // Something went wrong in parsing the date, you can show a toast or some feedback
                 Toast.makeText(this, "Error processing date", Toast.LENGTH_SHORT).show()
+                btnCalculate.isEnabled = false
             }
         } else {
             btnCalculate.isEnabled = false
@@ -150,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetSelectedDateField() {
-        binding.selectedBirthDate.text = getString(R.string.label_selected_date, DEFAULT_TEXT)
+        selectedDateView.text = getString(R.string.label_selected_date, DEFAULT_TEXT)
     }
 
     private fun showDatePickerDialog() {
@@ -185,7 +189,9 @@ class MainActivity : AppCompatActivity() {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-        datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+
+        // Set the maximum date for the DatePickerDialog to the current date
+        datePickerDialog.datePicker.maxDate = Calendar.getInstance().timeInMillis
         datePickerDialog.show()
     }
 
@@ -199,18 +205,32 @@ class MainActivity : AppCompatActivity() {
     private fun onDateSelected(date: Calendar) {
         selectedBirthDate = date
         btnCalculate.isEnabled = true
+        resetAgeTextFields()
 
-        binding.selectedBirthDate.text = getString(
+        // Only the date picker should update the selectedDateView immediately
+        selectedDateView.text = getString(
             R.string.label_selected_date,
-            "${date.get(Calendar.DAY_OF_MONTH)}/${date.get(Calendar.MONTH) + 1}/${
-                date.get(
-                    Calendar.YEAR
-                )
-            }"
+            String.format(
+                "%02d/%02d/%04d",
+                date.get(Calendar.DAY_OF_MONTH),
+                date.get(Calendar.MONTH) + 1,
+                date.get(Calendar.YEAR)
+            )
         )
     }
 
     private fun calculateAge() {
+
+        val selectedDateText = selectedDateView.text.toString()
+        if (selectedDateText == getString(R.string.label_selected_date, DEFAULT_TEXT) ||
+            selectedDateText != binding.editTextDate.text.toString()
+        ) {
+            selectedDateView.text = getString(
+                R.string.label_selected_date,
+                binding.editTextDate.text.toString()
+            )
+        }
+
         selectedBirthDate?.let { birthDate ->
             val currentDate = Calendar.getInstance()
 
