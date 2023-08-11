@@ -1,0 +1,27 @@
+<resources>
+
+    <!--    Titles-->
+    <string name="app_name">DOB_Calculator</string>
+    <string name="app_title">DOB CALCULATOR</string>
+    <string name="app_subtitle">Calculate your age in year, months, weeks, days, hours, minutes and seconds</string>
+    <string name="result_type_title">AGE IN: </string>
+
+    <!--    Buttons-->
+    <string name="select_birth_date_button">SELECT YOUR BIRTHDAY</string>
+    <string name="select_birth_date_description">Select birthdate</string>
+
+    <string name="calculate_button">CALCULATE</string>
+    <string name="calculate_description">Calculate age</string>
+
+    <!--    Result Type-->
+    <string name="label_selected_date">Selected Date: %1$s</string>
+
+    <string name="label_years">Years: %1$s</string>
+    <string name="label_months">Months: %1$s</string>
+    <string name="label_weeks">Weeks: %1$s</string>
+    <string name="label_days">Days: %1$s</string>
+    <string name="label_hours">Hours: %1$s</string>
+    <string name="label_minutes">Minutes: %1$s</string>
+    <string name="label_seconds">Seconds: %1$s</string>
+    <string name="app_title_description">App title</string>
+</resources>

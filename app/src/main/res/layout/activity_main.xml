@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="16dp">
+
+        <!-- Heading -->
+        <LinearLayout
+            android:id="@+id/app_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"> <!-- This drawable can give your heading a rounded-corner background if needed -->
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/accent_color"
+                android:contentDescription="@string/app_title_description"
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="8dp"
+                android:text="@string/app_title"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/app_subtitle"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Body -->
+        <LinearLayout
+            android:id="@+id/app_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:layout_marginRight="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Select Date"
+                        android:inputType="date"
+                        android:maxLength="10" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_select_date"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/select_birth_date_description"
+                    android:stateListAnimator="@animator/button_elevation"
+                    app:iconGravity="textStart"
+                    app:icon="@drawable/baseline_calendar_today_24" />
+            </LinearLayout>
+
+            <!-- Results CardView -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFF8cb"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/selected_birth_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/label_selected_date"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="Selected Date: ---" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/secondary_text_color" />
+
+                    <!-- Years -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_years"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_years"
+                        tools:text="Years: ---" />
+
+                    <!-- Months -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_months"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_months"
+                        tools:text="Months: ---" />
+
+                    <!-- Weeks -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_weeks"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_weeks"
+                        tools:text="Weeks: ---" />
+
+                    <!-- Days -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_days"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_days"
+                        tools:text="Days: ---" />
+
+                    <!-- Hours -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_hours"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_hours"
+                        tools:text="Hours: ---" />
+
+                    <!-- Minutes -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_minutes"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_minutes"
+                        tools:text="Minutes: ---" />
+
+                    <!-- Seconds -->
+                    <TextView
+                        android:id="@+id/text_view_age_in_seconds"
+                        style="@style/AgeTextViewStyle"
+                        android:text="@string/label_seconds"
+                        tools:text="Seconds: ---" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <!-- Calculate Button -->
+        <Button
+            android:id="@+id/btn_calculate"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/disabled_button_color"
+            android:contentDescription="@string/calculate_description"
+            android:enabled="false"
+            android:paddingVertical="12dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/calculate_button"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+</ScrollView>
+
