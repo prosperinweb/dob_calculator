@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         editTextDate.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                resetAgeTextFields()
                 validateAndProcessDate(s.toString())
             }
 
